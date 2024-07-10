@@ -1,0 +1,132 @@
+[96mINFO:[92m[07/10/2024 01:42:54 AM][0m: Cnaes.zip
+[96mINFO:[92m[07/10/2024 01:42:54 AM][0m: Empresas0.zip
+[96mINFO:[92m[07/10/2024 01:42:54 AM][0m: Empresas1.zip
+[96mINFO:[92m[07/10/2024 01:42:54 AM][0m: Empresas2.zip
+[96mINFO:[92m[07/10/2024 01:42:54 AM][0m: Empresas3.zip
+[96mINFO:[92m[07/10/2024 01:42:54 AM][0m: Empresas4.zip
+[96mINFO:[92m[07/10/2024 01:42:54 AM][0m: Empresas5.zip
+[96mINFO:[92m[07/10/2024 01:42:54 AM][0m: Empresas6.zip
+[96mINFO:[92m[07/10/2024 01:42:54 AM][0m: Empresas7.zip
+[96mINFO:[92m[07/10/2024 01:42:54 AM][0m: Empresas8.zip
+[96mINFO:[92m[07/10/2024 01:42:54 AM][0m: Empresas9.zip
+[96mINFO:[92m[07/10/2024 01:42:54 AM][0m: Estabelecimentos0.zip
+[96mINFO:[92m[07/10/2024 01:42:54 AM][0m: Estabelecimentos1.zip
+[96mINFO:[92m[07/10/2024 01:42:54 AM][0m: Estabelecimentos2.zip
+[96mINFO:[92m[07/10/2024 01:42:54 AM][0m: Estabelecimentos3.zip
+[96mINFO:[92m[07/10/2024 01:42:54 AM][0m: Estabelecimentos4.zip
+[96mINFO:[92m[07/10/2024 01:42:54 AM][0m: Estabelecimentos5.zip
+[96mINFO:[92m[07/10/2024 01:42:54 AM][0m: Estabelecimentos6.zip
+[96mINFO:[92m[07/10/2024 01:42:54 AM][0m: Estabelecimentos7.zip
+[96mINFO:[92m[07/10/2024 01:42:54 AM][0m: Estabelecimentos8.zip
+[96mINFO:[92m[07/10/2024 01:42:54 AM][0m: Estabelecimentos9.zip
+[96mINFO:[92m[07/10/2024 01:42:54 AM][0m: Motivos.zip
+[96mINFO:[92m[07/10/2024 01:42:54 AM][0m: Municipios.zip
+[96mINFO:[92m[07/10/2024 01:42:54 AM][0m: Naturezas.zip
+[96mINFO:[92m[07/10/2024 01:42:54 AM][0m: Paises.zip
+[96mINFO:[92m[07/10/2024 01:42:54 AM][0m: Qualificacoes.zip
+[96mINFO:[92m[07/10/2024 01:42:54 AM][0m: Simples.zip
+[96mINFO:[92m[07/10/2024 01:42:54 AM][0m: Socios0.zip
+[96mINFO:[92m[07/10/2024 01:42:54 AM][0m: Socios1.zip
+[96mINFO:[92m[07/10/2024 01:42:54 AM][0m: Socios2.zip
+[96mINFO:[92m[07/10/2024 01:42:54 AM][0m: Socios3.zip
+[96mINFO:[92m[07/10/2024 01:42:54 AM][0m: Socios4.zip
+[96mINFO:[92m[07/10/2024 01:42:54 AM][0m: Socios5.zip
+[96mINFO:[92m[07/10/2024 01:42:54 AM][0m: Socios6.zip
+[96mINFO:[92m[07/10/2024 01:42:54 AM][0m: Socios7.zip
+[96mINFO:[92m[07/10/2024 01:42:54 AM][0m: Socios8.zip
+[96mINFO:[92m[07/10/2024 01:42:54 AM][0m: Socios9.zip
+[96mERROR:[92m[07/10/2024 01:42:56 AM][0m: 
+ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+(download_arquiv_barprogress) finalizada com erro abaixo: 
+ (expected str, bytes or os.PathLike object, not NoneType)
+ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Traceback (most recent call last):
+  File "/Users/bruno/GitHub/Projeto_ETL_RFB_IBGE_ANP-master/src/B_Def_Global.py", line 494, in download_arquiv_barprogress
+    (os.path.join(file_path, nome_file + tipo_download)), "wb"
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen posixpath>", line 76, in join
+TypeError: expected str, bytes or os.PathLike object, not NoneType
+[96mERROR:[92m[07/10/2024 01:42:56 AM][0m: 
+ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+(baixar_arq_rfb_estab) finalizada com erro abaixo: 
+ (expected str, bytes or os.PathLike object, not NoneType)
+ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Traceback (most recent call last):
+  File "/Users/bruno/GitHub/Projeto_ETL_RFB_IBGE_ANP-master/src/C_Script_RFB.py", line 115, in baixar_arq_rfb_estab
+    path_file_2 = os.path.join(output_files, f)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen posixpath>", line 76, in join
+TypeError: expected str, bytes or os.PathLike object, not NoneType
+[91mERROR:[92m[07/10/2024 01:44:19 AM][0m: 
+ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+(gerenciar_diretorios) finalizada com erro abaixo: 
+ (stat: path should be string, bytes, os.PathLike or integer, not NoneType)
+ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Traceback (most recent call last):
+  File "/Users/bruno/GitHub/Projeto_ETL_RFB_IBGE_ANP-master/src/B_Def_Global.py", line 658, in gerenciar_diretorios
+    if os.path.exists(diretorio):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen genericpath>", line 19, in exists
+TypeError: stat: path should be string, bytes, os.PathLike or integer, not NoneType
+[91mERROR:[92m[07/10/2024 01:45:21 AM][0m: 
+ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+(gerenciar_bancos) finalizada com erro abaixo: 
+ (database "app_rfb" already exists
+)
+ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Traceback (most recent call last):
+  File "/Users/bruno/GitHub/Projeto_ETL_RFB_IBGE_ANP-master/src/B_Def_Global.py", line 401, in gerenciar_bancos
+    cur.execute(sql_3)
+psycopg2.errors.DuplicateDatabase: database "app_rfb" already exists
+
+[91mERROR:[92m[07/10/2024 01:45:23 AM][0m: 
+ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+(gerenciar_bancos) finalizada com erro abaixo: 
+ (database "app_rfb" already exists
+)
+ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Traceback (most recent call last):
+  File "/Users/bruno/GitHub/Projeto_ETL_RFB_IBGE_ANP-master/src/B_Def_Global.py", line 401, in gerenciar_bancos
+    cur.execute(sql_3)
+psycopg2.errors.DuplicateDatabase: database "app_rfb" already exists
+
+[91mINFO:[92m[07/10/2024 01:45:59 AM][0m: Cnaes.zip
+[91mINFO:[92m[07/10/2024 01:45:59 AM][0m: Empresas0.zip
+[91mINFO:[92m[07/10/2024 01:45:59 AM][0m: Empresas1.zip
+[91mINFO:[92m[07/10/2024 01:45:59 AM][0m: Empresas2.zip
+[91mINFO:[92m[07/10/2024 01:45:59 AM][0m: Empresas3.zip
+[91mINFO:[92m[07/10/2024 01:45:59 AM][0m: Empresas4.zip
+[91mINFO:[92m[07/10/2024 01:45:59 AM][0m: Empresas5.zip
+[91mINFO:[92m[07/10/2024 01:45:59 AM][0m: Empresas6.zip
+[91mINFO:[92m[07/10/2024 01:45:59 AM][0m: Empresas7.zip
+[91mINFO:[92m[07/10/2024 01:45:59 AM][0m: Empresas8.zip
+[91mINFO:[92m[07/10/2024 01:45:59 AM][0m: Empresas9.zip
+[91mINFO:[92m[07/10/2024 01:45:59 AM][0m: Estabelecimentos0.zip
+[91mINFO:[92m[07/10/2024 01:45:59 AM][0m: Estabelecimentos1.zip
+[91mINFO:[92m[07/10/2024 01:45:59 AM][0m: Estabelecimentos2.zip
+[91mINFO:[92m[07/10/2024 01:45:59 AM][0m: Estabelecimentos3.zip
+[91mINFO:[92m[07/10/2024 01:45:59 AM][0m: Estabelecimentos4.zip
+[91mINFO:[92m[07/10/2024 01:45:59 AM][0m: Estabelecimentos5.zip
+[91mINFO:[92m[07/10/2024 01:45:59 AM][0m: Estabelecimentos6.zip
+[91mINFO:[92m[07/10/2024 01:45:59 AM][0m: Estabelecimentos7.zip
+[91mINFO:[92m[07/10/2024 01:45:59 AM][0m: Estabelecimentos8.zip
+[91mINFO:[92m[07/10/2024 01:45:59 AM][0m: Estabelecimentos9.zip
+[91mINFO:[92m[07/10/2024 01:45:59 AM][0m: Motivos.zip
+[91mINFO:[92m[07/10/2024 01:45:59 AM][0m: Municipios.zip
+[91mINFO:[92m[07/10/2024 01:45:59 AM][0m: Naturezas.zip
+[91mINFO:[92m[07/10/2024 01:45:59 AM][0m: Paises.zip
+[91mINFO:[92m[07/10/2024 01:45:59 AM][0m: Qualificacoes.zip
+[91mINFO:[92m[07/10/2024 01:45:59 AM][0m: Simples.zip
+[91mINFO:[92m[07/10/2024 01:45:59 AM][0m: Socios0.zip
+[91mINFO:[92m[07/10/2024 01:45:59 AM][0m: Socios1.zip
+[91mINFO:[92m[07/10/2024 01:45:59 AM][0m: Socios2.zip
+[91mINFO:[92m[07/10/2024 01:45:59 AM][0m: Socios3.zip
+[91mINFO:[92m[07/10/2024 01:45:59 AM][0m: Socios4.zip
+[91mINFO:[92m[07/10/2024 01:45:59 AM][0m: Socios5.zip
+[91mINFO:[92m[07/10/2024 01:45:59 AM][0m: Socios6.zip
+[91mINFO:[92m[07/10/2024 01:45:59 AM][0m: Socios7.zip
+[91mINFO:[92m[07/10/2024 01:45:59 AM][0m: Socios8.zip
+[91mINFO:[92m[07/10/2024 01:45:59 AM][0m: Socios9.zip
+[91mINFO:[92m[07/10/2024 01:46:01 AM][0m: O arquivo /Users/bruno/GitHub/Projeto_ETL_RFB_IBGE_ANP-master/src/files/dados_rfb/OUTPUT_FILES/Cnaes.zip foi baixado com sucesso.
+[91mINFO:[92m[07/10/2024 01:46:01 AM][0m: ... (baixar_arq_rfb_estab) executada para download no arquivo/tabela (Cnaes.zip) 
+Com tempo de (00:00:00)h:mim:s ...
