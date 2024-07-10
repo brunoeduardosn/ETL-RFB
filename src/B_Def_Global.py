@@ -5,7 +5,8 @@ import shutil
 import time
 import timeit
 from time import sleep
-
+from psycopg2 import sql
+from psycopg2.extras import execute_batch
 import enlighten
 import pandas as pd
 import psycopg2
@@ -991,7 +992,7 @@ def leitura_csv_insercao_bd_sql(
         nome_tabela (String): Nome que será dado para tabela no banco de dados
         sql_create_table (String): SQL com criação da tabela com o mesmo esquema do csv
         op_header (String): Escolha de qual fonte é as informações (rfb ou ibge)
-        path_file (String): Caminho de qual fonte é as informações (rfb ou ibge) será usada nas variáveis de anbiente
+        path_file (String): Caminho de qual fonte é as informações (rfb ou ibge) será usada nas variáveis de ambiente
     """
 
     insert_start = time.time()
@@ -1023,7 +1024,6 @@ def leitura_csv_insercao_bd_sql(
             pg_conn.commit()
 
             # Criando tabela
-            pg_conn.autocommit = True  #
             cur.execute(sql_create_table)
             pg_conn.commit()
 
@@ -1039,9 +1039,20 @@ def leitura_csv_insercao_bd_sql(
             for i, f in enumerate(Items, 1):
                 print(f"{i} - Arquivo csv = {f}")
 
+            # Obtenha os nomes das colunas da tabela do banco de dados
+            cur.execute(f"SELECT column_name FROM information_schema.columns WHERE table_name = '{nome_tabela}' ORDER BY ordinal_position;")
+            table_columns = [row[0] for row in cur.fetchall()]
+            columns = ', '.join(table_columns)
+            placeholders = ', '.join(['%s'] * len(table_columns))
+
+            insert_query = f"""
+            INSERT INTO {nome_tabela} ({columns})
+            VALUES ({placeholders})
+            """
+
             for i, idx_arquivos_tmp in enumerate(
                 tqdm(Items, bar_format="{l_bar}{bar}|", colour="green")
-            ):  # o código \033[32m é usado para definir a cor do texto como verde e o código \033[0m é usado para redefinir a cor do texto para o padrão. Isso fará com que a barra de progresso seja exibida em verde.
+            ):
                 tmp_insert_start = time.time()
 
                 print_divisor_inicio_fim(
@@ -1049,60 +1060,23 @@ def leitura_csv_insercao_bd_sql(
                     0,
                 )
 
-                # GRAVAR DADOS NO BANCO
-
                 path_file_csv = os.path.join(extracted_files, idx_arquivos_tmp)
 
-                cur.execute("""SET CLIENT_ENCODING TO 'Utf-8';""")
-                cur.execute("""SHOW client_encoding;""")
-
-                if (op_header) == "rfb":
-                    sql_3 = f"""
-                    COPY {nome_tabela}
-                    FROM '{path_file_csv}' --input full file path here.
-                    DELIMITER ';' CSV;
-                    """
-
-                elif (op_header) == "ibge":
-                    sql_3 = f"""
-                    COPY {nome_tabela}
-                    FROM '{path_file_csv}' --input full file path here.
-                    DELIMITER ';' CSV HEADER;
-                    """
-
-                elif (op_header) == "anp":
-                    sql_3 = f"""
-                    COPY {nome_tabela}
-                    FROM '{path_file_csv}' --input full file path here.
-                    DELIMITER ';' CSV HEADER;
-                    """
-
-                elif (op_header) == "rais":
-                    sql_3 = f"""
-                    COPY {nome_tabela}
-                    FROM '{path_file_csv}' --input full file path here.
-                    DELIMITER ';' CSV;
-                    """
-
-                elif (op_header) == "ft":
-                    sql_3 = f"""
-                    COPY {nome_tabela}
-                    FROM '{path_file_csv}' --input full file path here.
-                    DELIMITER ';' CSV HEADER;
-                    """
-
-                elif (op_header) == "sgi":
-                    sql_3 = f"""
-                    COPY {nome_tabela}
-                    FROM '{path_file_csv}' --input full file path here.
-                    DELIMITER ';' CSV HEADER;
-                    """
-
+                # Ler o CSV em um DataFrame
+                if op_header in ["ibge", "anp", "ft", "sgi"]:
+                    df = pd.read_csv(path_file_csv, delimiter=';', encoding='utf-8')
                 else:
-                    print_divisor_inicio_fim("!!! Opção não suportada !!!", 3)
-                    log_retorno_erro("!!! Opção não suportada !!!")
+                    df = pd.read_csv(path_file_csv, delimiter=';', encoding='utf-8', header=None)
 
-                cur.execute(sql_3)
+                # Verifique se o número de colunas no CSV corresponde ao número de colunas na tabela
+                if len(df.columns) != len(table_columns):
+                    raise ValueError(f"O número de colunas no arquivo {idx_arquivos_tmp} não corresponde ao número de colunas na tabela {nome_tabela}.")
+
+                # Gerar uma lista de tuplas dos dados do DataFrame
+                data_tuples = [tuple(x) for x in df.to_numpy()]
+
+                # Executar a inserção em batch
+                execute_batch(cur, insert_query, data_tuples)
                 pg_conn.commit()
 
                 tmp_insert_end = time.time()
@@ -1115,13 +1089,8 @@ def leitura_csv_insercao_bd_sql(
                     "parcial",
                 )
 
-            # close connection
+            # Fechar conexão
             cur.close()
-
-            # https://towardsdatascience.com/upload-your-pandas-dataframe-to-your-database-10x-faster-eb6dc6609ddf
-            # https://www.enterprisedb.com/postgres-tutorials/how-import-and-export-data-using-csv-files-postgresql
-            # https://stackoverflow.com/questions/4867272/invalid-byte-sequence-for-encoding-utf8
-
         else:
             print_divisor_inicio_fim(
                 f"Sem arquivos na pasta ({extracted_files}) contendo o nome {nome_arquivo}",
@@ -1142,7 +1111,6 @@ def leitura_csv_insercao_bd_sql(
 
     except Exception as text:
         log_retorno_erro(text)
-
 
 def convert_tempo(n):
     """Função para conversão de quantidade de segundos para formato Hora, minutos e segundos

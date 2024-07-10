@@ -143,17 +143,17 @@ def executar_script_rfb():
     opcoes = [
         ("1 - Baixar arquivos da RFB (Estabelecimentos) ", baixar_arq_rfb_estab),
         ("2 - Extrair arquivos da RFB (Estabelecimentos) ", descompactar_arq_rfb_estab),
-        ("4 - Converter para Utf8, divisão de arquivos e criação da coluna cnpj completo - RFB (Estabelecimentos) ",
+        ("3 - Converter para Utf8, divisão de arquivos e criação da coluna cnpj completo - RFB (Estabelecimentos) ",
          converter_utf8_arq_rfb_estab),
-        ("3 - Inserir no banco de dados já criada as informações dos 'cvs' baixados da RFB (Estabelecimentos)",
+        ("4 - Inserir no banco de dados já criada as informações dos 'cvs' baixados da RFB (Estabelecimentos)",
          inserir_dados_estab_bd),
-        ("4 - Verificar/remover valores repetidos na coluna 'id_cod_cnpj_basico'...",
+        ("5 - Verificar/remover valores repetidos na coluna 'id_cod_cnpj_basico'...",
          cnpj_repetidos_rfb),
-        ("5 - Verificar/inserir valores faltantes em tabelas dimensão específicas...",
+        ("6 - Verificar/inserir valores faltantes em tabelas dimensão específicas...",
          dados_faltantes_rfb),
-        ("6 - Criar chaves primárias e estrangeiras nas coluas específicadas...",
+        ("7 - Criar chaves primárias e estrangeiras nas coluas específicadas...",
          criar_indices_rfb),
-        ("7 - Executar todos os passos acima em sequencia", sequencia_RFB)
+        ("8 - Executar todos os passos acima em sequencia", sequencia_RFB)
     ]
     return Menu("5 - Executar downloads RFB", opcoes)
 
