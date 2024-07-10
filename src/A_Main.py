@@ -81,7 +81,7 @@ def Principal():
         ("2 - Criar variáveis de ambiente", Definir_Var_Ambiente),
         ("3 - Criar/Exibir/Remover banco de dados", Banco_Dados),
         ("4 - Criar/Ler/Excluir diretórios de arquivos", caminhosDeArquivos),
-        ("5 - Executar downloads RFB", executar_script_rfb),
+        ("5 - Executar script RFB", executar_script_rfb),
         ("6 - Executar script IBGE", baixar_dados_ibge),
         ("7 - Executar script ANP", baixar_dados_anp)
     ]

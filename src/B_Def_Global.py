@@ -49,11 +49,11 @@ def Criar_Var_Ambiente():
     # cwd_atual_trab = (cwd_atual + '\src')
     print("=== Operações com o arquivo de configuração de ambiente === \n")
     # Criar arquivo de configuração de ambiente
-    host = "localhost"  # input('Digite o HOST usado do banco: ')
+    host = "dbtenant.postgres.database.azure.com"  # input('Digite o HOST usado do banco: ')
     port = "5432"  # input('Digite a PORTA usada do banco: ')
     user = "postgres"  # input('Digite o USERNAME usado do banco: ')
-    passw = "xxxx"  # input('Digite o PASSWORD usado do banco: ')
-    namebd = "dados_etl"  # input('Digite o NAME BD do banco: ')
+    passw = "na#ppx1m"  # input('Digite o PASSWORD usado do banco: ')
+    namebd = "dados_rfb"  # input('Digite o NAME BD do banco: ')
 
     try:
         print("Informações do arquivo de configuração de ambiente \n")
@@ -1043,12 +1043,15 @@ def leitura_csv_insercao_bd_sql(
             cur.execute(f"SELECT column_name FROM information_schema.columns WHERE table_name = '{nome_tabela}' ORDER BY ordinal_position;")
             table_columns = [row[0] for row in cur.fetchall()]
             columns = ', '.join(table_columns)
+            #print(f"Colunas: {columns}")
             placeholders = ', '.join(['%s'] * len(table_columns))
+            #print(f"placeholders: {placeholders}")
 
             insert_query = f"""
             INSERT INTO {nome_tabela} ({columns})
             VALUES ({placeholders})
             """
+            #print(f"insert_query: {insert_query}")
 
             for i, idx_arquivos_tmp in enumerate(
                 tqdm(Items, bar_format="{l_bar}{bar}|", colour="green")
@@ -1075,9 +1078,13 @@ def leitura_csv_insercao_bd_sql(
                 # Gerar uma lista de tuplas dos dados do DataFrame
                 data_tuples = [tuple(x) for x in df.to_numpy()]
 
+                #print(f'df: {df}')
+                #print(f'data_tuples: {data_tuples}')
                 # Executar a inserção em batch
                 execute_batch(cur, insert_query, data_tuples)
                 pg_conn.commit()
+                
+                os.remove(path_file_csv)
 
                 tmp_insert_end = time.time()
 

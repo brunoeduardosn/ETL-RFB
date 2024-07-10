@@ -389,3 +389,4 @@ files/*
 
 __my_env
 src/files
+logs.log

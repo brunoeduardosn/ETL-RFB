@@ -2,10 +2,10 @@ REM Verificar versao instalado do python (este projeto foi feito em Python 3.11)
 python --version
 
 REM Crie um ambiente virtual em Python 3.11
-python -m venv venv
+python3.11 -m venv __my_env
 
 REM Ativar o ambiente virtual
-call venv\Scripts\activate.bat
+source __my_env/bin/activate
 
 REM Atualizar PIP para última versão
 python.exe -m pip install --upgrade pip
@@ -15,3 +15,5 @@ python -m pip install -r requirements.txt
 
 REM Listar pacotes instalados
 pip list
+
+python ./src/A_Main.py 

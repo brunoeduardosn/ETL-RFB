@@ -180,6 +180,8 @@ def descompactar_arq_rfb_estab():
                 with zipfile.ZipFile(full_path, 'r') as zip_ref:
                     zip_ref.extractall(extracted_files)
 
+                os.remove(full_path)
+
                 tmp_insert_end = time.time()
 
                 print_parcial_final_log_inf_retorno('descompactação',
@@ -246,12 +248,16 @@ def converter_utf8_arq_rfb_estab():
                 split_csv_file_pandas_todos(extracted_files,
                                             extracted_files_convert,
                                             idx_arquivos_tmp,
-                                            5000000,
+                                            1000,
                                             'latin-1',
                                             'Utf-8',
                                             None,
                                             False
                                             )
+                
+                original_file_path = os.path.join(extracted_files, idx_arquivos_tmp)
+
+                os.remove(original_file_path)
 
                 print_divisor_inicio_fim(
                     'Arquivo {} foi convertido com sucesso!... \n'.format(
@@ -304,10 +310,11 @@ def inserir_dados_estab_bd():
             sql_1 = f'''
                 SHOW DATESTYLE;
                 '''
-
+            #print(f'SQL_1: {sql_1}')
             sql_2 = f'''
-                ALTER DATABASE {nome_banco} SET datestyle TO ISO, YMD;;
+                ALTER DATABASE {nome_banco} SET datestyle TO ISO, YMD; 
                 '''
+            #print(f'SQL_2: {sql_2}')
 
             print_divisor_inicio_fim('######## Alterar DATAESTYLE do banco PostgreSQL do padrão "ISO, DMY" para "ISO, YMD" ######## \n!!!AGUARDE FINALIZAR!!!',
                                      1)
@@ -315,6 +322,7 @@ def inserir_dados_estab_bd():
             cur.execute(sql_2)
             pg_conn.commit()
             cur.execute(sql_1)
+            #print_divisor_inicio_fim('=========== passou aqui ===========',1)
             print_divisor_inicio_fim('######## DATAESTYLE do banco PostgreSQL alterado para o padrão "ISO, YMD" ########',
                                      2)
 
