@@ -388,3 +388,4 @@ files/*
 # End of https://www.toptal.com/developers/gitignore/api/python,pycharm,visualstudiocode,jetbrains
 
 __my_env
+src/files
