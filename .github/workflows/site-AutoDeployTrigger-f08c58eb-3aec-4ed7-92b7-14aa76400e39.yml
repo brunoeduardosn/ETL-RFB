@@ -1,0 +1,47 @@
+name: Trigger auto deployment for site
+
+# When this action will be executed
+on:
+  # Automatically trigger it when detected changes in repo
+  push:
+    branches: 
+      [ main ]
+    paths:
+    - '**'
+    - '.github/workflows/site-AutoDeployTrigger-f08c58eb-3aec-4ed7-92b7-14aa76400e39.yml'
+
+  # Allow manual trigger 
+  workflow_dispatch:      
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    permissions: 
+      id-token: write #This is required for requesting the OIDC JWT Token
+      contents: read #Required when GH token is used to authenticate with private repo
+
+    steps:
+      - name: Checkout to the branch
+        uses: actions/checkout@v2
+
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.SITE_AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.SITE_AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.SITE_AZURE_SUBSCRIPTION_ID }}
+
+      - name: Build and push container image to registry
+        uses: azure/container-apps-deploy-action@v2
+        with:
+          appSourcePath: ${{ github.workspace }} 
+          registryUrl: docker.io
+          registryUsername: ${{ secrets.SITE_REGISTRY_USERNAME }}
+          registryPassword: ${{ secrets.SITE_REGISTRY_PASSWORD }}
+          containerAppName: site
+          resourceGroup: cloud-shell-storage-eastus
+          imageToBuild: brunoeduardosn/site:${{ github.sha }}
+          _buildArgumentsKey_: |
+            _buildArgumentsValues_
+
+
